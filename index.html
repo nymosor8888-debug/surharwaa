@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сур Харвааны Тэмцээний Бүртгэл</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&family=Oranienbaum&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0f2b48',
+                            900: '#0a192f',
+                            950: '#050c18',
+                        },
+                        gold: {
+                            100: '#fbf4dd',
+                            300: '#f3e1a0',
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#b88e28',
+                            700: '#8c6819',
+                        },
+                        parchment: {
+                            50: '#fdfbf7',
+                            100: '#f7f2e4',
+                            200: '#efe5cb',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Cinzel', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                        trad: ['Oranienbaum', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .trad-gold-border {
+            border: 2px solid #d4af37;
+            box-shadow: inset 0 0 0 2px rgba(212, 175, 55, 0.2), 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #0a192f 0%, #0f2b48 50%, #050c18 100%);
+        }
+
+        .gold-btn {
+            background: linear-gradient(135deg, #e5c158 0%, #d4af37 50%, #b88e28 100%);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gold-btn:hover {
+            background: linear-gradient(135deg, #f3e1a0 0%, #e5c158 50%, #d4af37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .glass-card {
+            background: rgba(10, 25, 47, 0.88);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050c18;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b88e28;
+            border-radius: 4px;
+        }
+
+        @media print {
+            body { background: white !important; color: black !important; }
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            .mandate-card { 
+                box-shadow: none !important; 
+                border: 2px solid #000 !important; 
+                background: #fff !important; 
+                color: #000 !important;
+            }
+        }
+
+        .mongol-pattern-line {
+            height: 6px;
+            background: repeating-linear-gradient(
+                90deg,
+                #d4af37 0px,
+                #d4af37 15px,
+                #8c6819 15px,
+                #8c6819 30px,
+                #9b111e 30px,
+                #9b111e 45px
+            );
+        }
+    </style>
+</head>
+<body class="bg-navy-950 font-body text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+    <!-- Top Pattern Ribbon -->
+    <div class="mongol-pattern-line w-full"></div>
+
+    <!-- Header -->
+    <header class="gold-gradient-bg border-b border-gold-500/30 shadow-2xl py-6 px-4">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-14 h-14 rounded-full bg-navy-900 border-2 border-gold-400 flex items-center justify-center text-gold-400 text-2xl shadow-lg">
+                    🎯
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-gold-600 tracking-wider uppercase">
+                        ҮНДЭСНИЙ СУР ХАРВААНЫ ТЭМЦЭЭН
+                    </h1>
+                    <p class="text-gold-300/90 font-trad text-sm sm:text-base italic">
+                        "Хараа нь хурц оноо мэргэн уухайн цээл байх болтугай!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Stats Badge -->
+            <div class="bg-navy-900/90 px-4 py-2 rounded-xl border border-gold-500/30 flex items-center space-x-3">
+                👥
+                <div class="text-xs">
+                    <span class="text-slate-400 block">Бүртгүүлсэн харваач:</span>
+                    <strong id="headerTotalCount" class="text-gold-300 font-bold text-sm">3 харваач</strong>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl w-full mx-auto p-4 sm:p-6 my-4 flex-grow space-y-8">
+
+        <!-- Tournament Info Banner -->
+        <section class="glass-card rounded-2xl trad-gold-border p-6 shadow-2xl">
+            <h2 class="text-lg font-bold text-gold-300 uppercase tracking-wide border-b border-gold-500/20 pb-3 mb-4 flex items-center gap-2">
+                🏆 Тэмцээний товч мэдээлэл
+                <button id="adminBtn" onclick="toggleAdmin()" class="hidden ml-auto gold-btn text-navy-950 text-xs font-bold px-3 py-1.5 rounded-lg normal-case">⚙️ Админ: засах</button>
+            </h2>
+            <form id="adminForm" onsubmit="saveInfo(event)" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 text-xs bg-navy-950/60 p-4 rounded-xl border border-gold-500/30">
+                <label class="text-gold-300">Байршил<input id="eLocation" class="mt-1 w-full px-3 py-2 bg-navy-900 border border-gold-500/30 rounded-lg text-slate-100"></label>
+                <label class="text-gold-300">Хэзээ<input id="eDate" class="mt-1 w-full px-3 py-2 bg-navy-900 border border-gold-500/30 rounded-lg text-slate-100"></label>
+                <label class="text-gold-300">Холбогдох утас<input id="ePhone" class="mt-1 w-full px-3 py-2 bg-navy-900 border border-gold-500/30 rounded-lg text-slate-100"></label>
+                <label class="text-gold-300">Бүртгэлийн хураамж<input id="eFee" class="mt-1 w-full px-3 py-2 bg-navy-900 border border-gold-500/30 rounded-lg text-slate-100"></label>
+                <div class="sm:col-span-2 flex items-center gap-3"><button class="gold-btn text-navy-950 font-bold px-4 py-2 rounded-lg">Хадгалах</button><span id="adminMsg" class="text-slate-400"></span></div>
+            </form>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                <div class="bg-navy-900/80 p-3.5 rounded-xl border border-gold-500/20">
+                    <span class="text-slate-400 block mb-1 uppercase tracking-wider">Байршил:</span>
+                    <strong id="infoLocation" class="text-slate-100 font-semibold text-sm">Төв Сур Харвааны Талбай</strong>
+                </div>
+                <div class="bg-navy-900/80 p-3.5 rounded-xl border border-gold-500/20">
+                    <span class="text-slate-400 block mb-1 uppercase tracking-wider">Хэзээ:</span>
+                    <strong id="infoDate" class="text-slate-100 font-semibold text-sm">2026 оны 11 сарын 15 (09:00)</strong>
+                </div>
+                <div class="bg-navy-900/80 p-3.5 rounded-xl border border-gold-500/20">
+                    <span class="text-slate-400 block mb-1 uppercase tracking-wider">Холбогдох утас:</span>
+                    <strong id="infoPhone" class="text-slate-100 font-semibold text-sm">9911-XXXX, 8811-XXXX</strong>
+                </div>
+                <div class="bg-navy-900/80 p-3.5 rounded-xl border border-gold-500/20">
+                    <span class="text-slate-400 block mb-1 uppercase tracking-wider">Бүртгэлийн хураамж:</span>
+                    <strong id="infoFee" class="text-gold-300 font-bold text-sm">20,000₮</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Form -->
+        <section class="glass-card rounded-2xl trad-gold-border p-6 sm:p-8 shadow-2xl">
+            <div class="border-b border-gold-500/20 pb-4 mb-6">
+                <h2 class="text-xl font-bold text-gold-300 uppercase tracking-wide flex items-center gap-2">
+                    ✒️ Харваачийн бүртгэлийн асуумж
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">Тэмцээнд бүртгүүлэхийн тулд доорх мэдээллийг гүйцэд сэргээн оруулна уу.</p>
+            </div>
+
+            <form id="archeryRegistrationForm" onsubmit="submitRegistration(event)" class="space-y-6">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Full Name -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-gold-300 mb-2">
+                            Овог Нэр <span class="text-red-400">*</span>
+                        </label>
+                        <input type="text" id="fullName" required placeholder="Нэрээ бүтэн оруулна уу"
+                            class="w-full px-4 py-3 bg-navy-900 border border-gold-500/30 rounded-xl focus:ring-2 focus:ring-gold-400 text-slate-100 placeholder-slate-500 outline-none text-sm">
+                    </div>
+
+                    <!-- Register Number -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-gold-300 mb-2">
+                            Регистрийн дугаар <span class="text-red-400">*</span>
+                        </label>
+                        <input type="text" id="registerNum" required placeholder="УШ98122011" oninput="this.value = this.value.toUpperCase()"
+                            class="w-full px-4 py-3 bg-navy-900 border border-gold-500/30 rounded-xl focus:ring-2 focus:ring-gold-400 text-slate-100 placeholder-slate-500 outline-none uppercase font-mono text-sm">
+                    </div>
+
+                    <!-- Phone -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-gold-300 mb-2">
+                            Утасны дугаар <span class="text-red-400">*</span>
+                        </label>
+                        <input type="tel" id="phone" required pattern="[0-9]{8}" placeholder="8811xxxx"
+                            class="w-full px-4 py-3 bg-navy-900 border border-gold-500/30 rounded-xl focus:ring-2 focus:ring-gold-400 text-slate-100 placeholder-slate-500 outline-none text-sm">
+                    </div>
+
+                    <!-- Age -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-gold-300 mb-2">
+                            Нас <span class="text-red-400">*</span>
+                        </label>
+                        <input type="number" id="age" required min="8" max="100" placeholder="Насаа оруулна уу"
+                            class="w-full px-4 py-3 bg-navy-900 border border-gold-500/30 rounded-xl focus:ring-2 focus:ring-gold-400 text-slate-100 placeholder-slate-500 outline-none text-sm">
+                    </div>
+
+                    <!-- Title (Text Input) -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-gold-300 mb-2">
+                            Сур харвааны цол <span class="text-red-400">*</span>
+                        </label>
+                        <input type="text" id="customTitle" required placeholder="Улсын Дархан Мэргэн, Аймгийн Мэргэн, Залуу харваач..."
+                            class="w-full px-4 py-3 bg-navy-900 border border-gold-500/30 rounded-xl focus:ring-2 focus:ring-gold-400 text-slate-100 placeholder-slate-500 outline-none text-sm">
+                    </div>
+
+                    <!-- Year Title Awarded -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-bold text-gold-300 mb-2">
+                            Цол авсан он
+                        </label>
+                        <input type="number" id="titleYear" min="1950" max="2026" placeholder="Цол хүртсэн он"
+                            class="w-full px-4 py-3 bg-navy-900 border border-gold-500/30 rounded-xl focus:ring-2 focus:ring-gold-400 text-slate-100 placeholder-slate-500 outline-none text-sm">
+                    </div>
+
+                    <!-- Affiliation -->
+                    <div class="md:col-span-2">
+                        <label class="block text-xs uppercase tracking-wider font-bold text-gold-300 mb-2">
+                            Харьяалал / Клуб / Аймаг, сум <span class="text-red-400">*</span>
+                        </label>
+                        <input type="text" id="affiliation" required placeholder="Төв аймаг, 'Хангарьд' клуб гэх мэт"
+                            class="w-full px-4 py-3 bg-navy-900 border border-gold-500/30 rounded-xl focus:ring-2 focus:ring-gold-400 text-slate-100 placeholder-slate-500 outline-none text-sm">
+                    </div>
+
+                </div>
+
+                <!-- Payment Fee Row -->
+                <div class="bg-navy-900 p-4 rounded-xl border border-gold-500/30 flex items-center justify-between">
+                    <span class="text-xs text-slate-300 uppercase tracking-wider font-bold">Төлбөрийн хэмжээ:</span>
+                    <strong class="text-xl font-bold text-gold-400">20,000₮</strong>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full gold-btn text-navy-950 font-extrabold py-4 rounded-xl text-base uppercase tracking-wider flex items-center justify-center space-x-2">
+                    <span>Бүртгүүлж мандат авах</span>
+                    
+                </button>
+
+            </form>
+        </section>
+
+        <!-- Master Roster Table -->
+        <section class="glass-card rounded-2xl trad-gold-border p-6 sm:p-8 shadow-2xl">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-4 border-b border-gold-500/20">
+                <div>
+                    <h2 class="text-lg font-bold text-gold-300 uppercase tracking-wide flex items-center gap-2">
+                         Нийт бүртгэгдсэн харваачдын жагсаалт
+                    </h2>
+                    <p class="text-xs text-slate-400">Бүртгэл хийгдсэн даруйд энд шууд нэмэгдэнэ</p>
+                </div>
+
+                <!-- Search -->
+                <input type="text" id="searchInput" oninput="filterRoster()" placeholder="Нэр, регистрээр хайх..."
+                    class="px-3.5 py-2 bg-navy-900 border border-gold-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-500 outline-none w-full sm:w-64">
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-navy-900 text-gold-300 uppercase font-bold tracking-wider border-b border-gold-500/30">
+                        <tr>
+                            <th class="p-3">#</th>
+                            <th class="p-3">Нэр</th>
+                            <th class="p-3">Регистр</th>
+                            <th class="p-3">Цол</th>
+                            <th class="p-3">Цол он</th>
+                            <th class="p-3">Харьяалал</th>
+                            <th class="p-3">Мандат</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rosterTableBody" class="divide-y divide-gold-500/10 text-slate-300">
+                        <!-- Dynamically filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mandate Ticket Modal -->
+    <section id="mandateModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/80 backdrop-blur-md overflow-y-auto">
+        <div class="mandate-card glass-card rounded-2xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative my-8 bg-parchment-50 text-slate-900 border-2 border-gold-500">
+            
+            <button onclick="closeMandateModal()" class="no-print absolute top-4 right-4 text-slate-500 hover:text-slate-800 text-xl">
+                
+            </button>
+
+            <!-- Card Header -->
+            <div class="text-center pb-3 border-b-2 border-gold-600/40">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-navy-900 text-gold-400 rounded-full mb-2 border-2 border-gold-500">
+                    
+                </div>
+                <h2 class="text-xl font-bold font-heading text-navy-900 uppercase tracking-wider">
+                    ТЭМЦЭЭНИЙ МАНДАТ
+                </h2>
+                <p class="text-xs font-mono font-semibold text-slate-600 uppercase">
+                    Дугаар: <span id="mCardID">ARCH-2026-1001</span>
+                </p>
+            </div>
+
+            <!-- Blessing -->
+            <div class="my-4 p-3 bg-gold-100/90 border-y border-gold-400 text-center rounded-xl">
+                <p class="font-trad text-base sm:text-lg font-bold text-navy-900 italic">
+                    "Хараа нь хурц оноо мэргэн уухайн цээл байх болтугай!"
+                </p>
+            </div>
+
+            <!-- Details -->
+            <div class="grid grid-cols-2 gap-3 text-xs mb-4 bg-white p-4 rounded-xl border border-parchment-200">
+                <div>
+                    <span class="text-slate-500 block uppercase text-[10px]">Овог Нэр:</span>
+                    <strong id="mCardName" class="text-navy-900 font-bold text-sm">Баатарын Болд</strong>
+                </div>
+
+                <div>
+                    <span class="text-slate-500 block uppercase text-[10px]">Регистрийн дугаар:</span>
+                    <strong id="mCardReg" class="text-navy-900 font-mono">УШ98122011</strong>
+                </div>
+
+                <div>
+                    <span class="text-slate-500 block uppercase text-[10px]">Сур харвааны цол:</span>
+                    <span id="mCardTitle" class="text-slate-800 font-semibold">Улсын Дархан Мэргэн</span>
+                </div>
+
+                <div>
+                    <span class="text-slate-500 block uppercase text-[10px]">Харьяалал:</span>
+                    <span id="mCardAffiliation" class="text-slate-800 font-semibold">Төв аймаг</span>
+                </div>
+
+                <div class="col-span-2 border-t pt-2 border-slate-100 flex justify-between items-center">
+                    <span class="text-slate-500 uppercase text-[10px]">Төлбөр:</span>
+                    <strong class="text-emerald-700 font-bold">20,000₮ (Баталгаажсан)</strong>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="no-print mt-5 flex justify-end gap-3">
+                <button onclick="window.print()" class="px-4 py-2 bg-navy-900 hover:bg-navy-800 text-gold-300 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                    🖨️
+                    <span>Хэвлэх</span>
+                </button>
+                <button onclick="closeMandateModal()" class="px-4 py-2 bg-slate-300 hover:bg-slate-400 text-slate-800 rounded-xl text-xs font-bold transition">
+                    Хаах
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="no-print text-center py-3 text-xs bg-navy-950">
+        <button id="loginToggle" onclick="document.getElementById('loginForm').classList.toggle('hidden')" class="text-slate-500 hover:text-gold-300">🔐 Админ нэвтрэх</button>
+        <form id="loginForm" class="hidden mt-2 flex flex-wrap justify-center gap-2">
+            <input id="loginEmail" type="email" placeholder="Имэйл" class="px-3 py-2 bg-navy-900 border border-gold-500/30 rounded-lg text-slate-100">
+            <input id="loginPass" type="password" placeholder="Нууц үг" class="px-3 py-2 bg-navy-900 border border-gold-500/30 rounded-lg text-slate-100">
+            <button class="gold-btn text-navy-950 font-bold px-4 py-2 rounded-lg">Нэвтрэх</button>
+            <span id="loginMsg" class="w-full text-red-400"></span>
+        </form>
+    </div>
+    <footer class="bg-navy-950 text-gold-400/60 text-center py-4 text-xs border-t border-gold-500/20 no-print">
+        <p>© 2026 Монголын Үндэсний Сур Харвааны Холбоо</p>
+    </footer>
+
+    <script>
+        let roster = [];
+
+        function submitRegistration(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('fullName').value.trim();
+            const registerNum = document.getElementById('registerNum').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const age = parseInt(document.getElementById('age').value);
+            const customTitle = document.getElementById('customTitle').value.trim();
+            const titleYear = document.getElementById('titleYear').value.trim() || '-';
+            const affiliation = document.getElementById('affiliation').value.trim();
+
+            const newID = 'ARCH-2026-' + Math.floor(1000 + Math.random() * 9000);
+
+            const newArcher = {
+                id: newID,
+                name: fullName,
+                reg: registerNum,
+                phone: phone,
+                age: age,
+                title: customTitle,
+                year: titleYear,
+                affiliation: affiliation
+            };
+
+            roster.unshift(newArcher);
+            renderRoster();
+            document.getElementById('archeryRegistrationForm').reset();
+            openMandateModal(newArcher);
+        }
+
+        function renderRoster() {
+            const tbody = document.getElementById('rosterTableBody');
+            tbody.innerHTML = '';
+            document.getElementById('headerTotalCount').textContent = `${roster.length} харваач`;
+
+            roster.forEach((a, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-navy-900/60 transition";
+                tr.innerHTML = `
+                    <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
+                    <td class="p-3 font-bold text-slate-100">${a.name}</td>
+                    <td class="p-3 font-mono text-gold-300">${a.reg}</td>
+                    <td class="p-3 text-slate-300">${a.title}</td>
+                    <td class="p-3 text-slate-400">${a.year}</td>
+                    <td class="p-3 text-slate-300">${a.affiliation}</td>
+                    <td class="p-3">
+                        <button onclick="openMandateByID('${a.id}')" class="text-xs text-gold-400 hover:underline">
+                            🪪 Мандат
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterRoster() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = roster.filter(a => a.name.toLowerCase().includes(query) || a.reg.toLowerCase().includes(query));
+
+            const tbody = document.getElementById('rosterTableBody');
+            tbody.innerHTML = '';
+
+            filtered.forEach((a, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-navy-900/60 transition";
+                tr.innerHTML = `
+                    <td class="p-3 font-mono text-slate-400">${idx + 1}</td>
+                    <td class="p-3 font-bold text-slate-100">${a.name}</td>
+                    <td class="p-3 font-mono text-gold-300">${a.reg}</td>
+                    <td class="p-3 text-slate-300">${a.title}</td>
+                    <td class="p-3 text-slate-400">${a.year}</td>
+                    <td class="p-3 text-slate-300">${a.affiliation}</td>
+                    <td class="p-3">
+                        <button onclick="openMandateByID('${a.id}')" class="text-xs text-gold-400 hover:underline">
+                            🪪 Мандат
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openMandateModal(archer) {
+            document.getElementById('mCardID').textContent = archer.id;
+            document.getElementById('mCardName').textContent = archer.name;
+            document.getElementById('mCardReg').textContent = archer.reg;
+            document.getElementById('mCardTitle').textContent = `${archer.title} ${archer.year !== '-' ? '('+archer.year+' он)' : ''}`;
+            document.getElementById('mCardAffiliation').textContent = archer.affiliation;
+            document.getElementById('mandateModal').classList.remove('hidden');
+        }
+
+        function openMandateByID(id) {
+            const archer = roster.find(item => item.id === id);
+            if (archer) openMandateModal(archer);
+        }
+
+        function closeMandateModal() {
+            document.getElementById('mandateModal').classList.add('hidden');
+        }
+
+
+        const F={Location:'infoLocation',Date:'infoDate',Phone:'infoPhone',Fee:'infoFee'};
+        const K={Location:'location',Date:'date',Phone:'phone',Fee:'fee'};
+        let infoRef=null;
+        function applyInfo(d){
+            for(const k in F){ if(d && d[K[k]]) document.getElementById(F[k]).textContent=d[K[k]]; }
+        }
+        function toggleAdmin(){
+            const f=document.getElementById('adminForm');
+            for(const k in F){ document.getElementById('e'+k).value=document.getElementById(F[k]).textContent; }
+            f.classList.toggle('hidden');
+        }
+        async function saveInfo(e){
+            e.preventDefault();
+            const msg=document.getElementById('adminMsg');
+            const data={};
+            for(const k in F){ data[K[k]]=document.getElementById('e'+k).value.trim(); }
+            try{ await infoRef.set(data); msg.textContent='Хадгалагдлаа ✓'; }
+            catch(err){ msg.textContent='Алдаа: хадгалах эрхгүй байна'; }
+        }
+        
+
+        window.onload = function() {
+            renderRoster();
+        };
+    </script>
+<script>
+        function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+        let rosterCol=null, isAdminUser=false;
+
+        function renderRoster(){
+            const q=(document.getElementById('searchInput').value||'').toLowerCase();
+            const list=roster.filter(a=>String(a.name).toLowerCase().includes(q)||String(a.reg).toLowerCase().includes(q));
+            document.getElementById('headerTotalCount').textContent=roster.length+' харваач';
+            document.getElementById('rosterTableBody').innerHTML=list.map((a,i)=>`<tr class="hover:bg-navy-900/60 transition">
+                <td class="p-3 font-mono text-slate-400">${i+1}</td>
+                <td class="p-3 font-bold text-slate-100">${esc(a.name)}</td>
+                <td class="p-3 font-mono text-gold-300">${esc(a.reg)}</td>
+                <td class="p-3 text-slate-300">${esc(a.title)}</td>
+                <td class="p-3 text-slate-400">${esc(a.year)}</td>
+                <td class="p-3 text-slate-300">${esc(a.affiliation)}</td>
+                <td class="p-3 whitespace-nowrap">
+                    <button onclick="openMandateByID('${esc(a.id)}')" class="text-xs text-gold-400 hover:underline">🪪 Мандат</button>
+                    ${isAdminUser&&rosterCol?`<button onclick="deleteArcher('${esc(a.id)}')" class="text-xs text-red-400 hover:underline ml-3">Устгах</button>`:''}
+                </td></tr>`).join('');
+        }
+        function filterRoster(){ renderRoster(); }
+
+        async function deleteArcher(id){
+            if(!rosterCol||!confirm('Энэ харваачийг жагсаалтаас устгах уу?')) return;
+            try{ await rosterCol.doc(id).delete(); }catch(e){ alert('Устгах эрхгүй байна'); }
+        }
+
+        async function submitRegistration(e){
+            e.preventDefault();
+            const g=id=>document.getElementById(id).value.trim();
+            const id='ARCH-2026-'+Math.floor(10000+Math.random()*90000);
+            const a={id,name:g('fullName'),reg:g('registerNum'),phone:g('phone'),age:parseInt(g('age'))||0,title:g('customTitle'),year:g('titleYear')||'-',affiliation:g('affiliation'),ts:Date.now()};
+            if(rosterCol){
+                try{ await rosterCol.doc(id).set(a); }
+                catch(err){ alert('Бүртгэхэд алдаа гарлаа. Дахин оролдоно уу.'); return; }
+            } else { roster.unshift(a); renderRoster(); }
+            document.getElementById('archeryRegistrationForm').reset();
+            openMandateModal(a);
+        }
+
+        
+    </script>
+<script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getFirestore, doc, collection, setDoc, deleteDoc, onSnapshot, query, orderBy, writeBatch }
+            from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+            from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+        // ===== ЭНДЭЭС ӨӨРЧИЛНӨ: өөрийн Firebase тохиргоо =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyC2LYeoClVED4BESefZJ_OLs6F5o2wXKEA",
+            authDomain: "nymosor-311a1.firebaseapp.com",
+            projectId: "nymosor-311a1",
+            appId: "1:405690008292:web:4e2bf04989dba8ed7322f1"
+        };
+        const ADMIN_EMAIL = "nymosor8888@gmail.com"; // Firebase дээр үүсгэсэн админ имэйл
+        // =====================================================
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Хуучин кодтой холбох давхарга
+        infoRef = { set: d => setDoc(doc(db, 'info', 'main'), d) };
+        rosterCol = {
+            doc: id => ({
+                set: async a => {
+                    const { phone, age, ...pub } = a;
+                    const b = writeBatch(db);
+                    b.set(doc(db, 'roster', id), pub);
+                    b.set(doc(db, 'contacts', id), { phone, age, ts: a.ts });
+                    await b.commit();
+                },
+                delete: () => deleteDoc(doc(db, 'roster', id))
+            })
+        };
+
+        onSnapshot(doc(db, 'info', 'main'), s => { if (s.exists()) applyInfo(s.data()); }, () => {});
+        onSnapshot(query(collection(db, 'roster'), orderBy('ts', 'desc')),
+            s => { roster = s.docs.map(d => d.data()); renderRoster(); }, () => {});
+
+        onAuthStateChanged(auth, u => {
+            isAdminUser = !!u && u.email === ADMIN_EMAIL;
+            document.getElementById('adminBtn').classList.toggle('hidden', !isAdminUser);
+            if (!isAdminUser) document.getElementById('adminForm').classList.add('hidden');
+            const t = document.getElementById('loginToggle');
+            t.textContent = isAdminUser ? '🔓 Админ гарах' : '🔐 Админ нэвтрэх';
+            t.onclick = isAdminUser ? () => signOut(auth) : () => document.getElementById('loginForm').classList.toggle('hidden');
+            if (isAdminUser) document.getElementById('loginForm').classList.add('hidden');
+            renderRoster();
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            try {
+                await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
+                document.getElementById('loginMsg').textContent = '';
+            } catch (err) {
+                document.getElementById('loginMsg').textContent = 'Имэйл эсвэл нууц үг буруу байна';
+            }
+        });
+    </script>
+</body>
+</html>
